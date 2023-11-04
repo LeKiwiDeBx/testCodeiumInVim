@@ -14,8 +14,8 @@ let g:bmf_dict = {'alert': bmf_symb[0], 'ok': bmf_symb[1], 'warning': bmf_symb[2
 function! AddToGutter(keySymbol)
     let l:current_line = line('.')
     let l:current_buffer = bufnr('%')
-    if !empty(bmf_dict[a:keySymbol])
-        let l:current_symbol = bmf_dict[a:keySymbol]
+    if !empty(g:bmf_dict[a:keySymbol])
+        let l:current_symbol = g:bmf_dict[a:keySymbol]
         let sign_id = sign_place(0, 'Codeium', l:current_symbol, l:current_buffer, {'lnum': l:current_line})
     endif
 endfunction
