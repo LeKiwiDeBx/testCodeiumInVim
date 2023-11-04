@@ -1,5 +1,5 @@
-if exists("g:loaded_codeium") 
-    finish 
+if exists("g:loaded_codeium")
+    "finish
 endif
 let g:loaded_codeium = 1
 "write list a symbols A O W E I
@@ -33,9 +33,16 @@ function! GetKeysSymbols(A, L, P)
     return keys(g:bmf_dict)->sort()
 endfunction
 
+function! TestEcho()
+    echom "Test echo from *testCodeiumInVim* plugin"
+endfunction
+
 "Commands
 command! -nargs=? -complete=customlist,GetKeysSymbols AddToGutter call AddToGutter(<f-args>)
 command! RemoveFromGutter call RemoveFromGutter()
+
+command! TestEcho call TestEcho()
+nnoremap bb TestEcho <CR>
 
 "Mappings
 "add to gutter
