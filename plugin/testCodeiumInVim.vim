@@ -42,7 +42,7 @@ command! -nargs=? -complete=customlist,GetKeysSymbols AddToGutter call AddToGutt
 command! RemoveFromGutter call RemoveFromGutter()
 
 command! -nargs=0 TestEcho call TestEcho()
-execute 'nmap te <Plug>TestEcho<CR>'
+execute 'nmap te <Plug>TestEcho'
 
 "Mappings
 "add to gutter
