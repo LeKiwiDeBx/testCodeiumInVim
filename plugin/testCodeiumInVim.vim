@@ -8,6 +8,7 @@ let g:bmf_symb = ['A', 'O', 'W', 'E', 'I']
 "write a global dictionary named bmf_dict with keys alert ok warning error info
 "and values bmf_symb
 let g:bmf_dict = {'alert': g:bmf_symb[0], 'ok': g:bmf_symb[1], 'warning': g:bmf_symb[2], 'error': g:bmf_symb[3], 'info': g:bmf_symb[4]}
+<<<<<<< HEAD
 let g:listofsignsdefine = []
 "sign define -> sign_define({list})
 function! s:SignDefine()
@@ -17,6 +18,8 @@ function! s:SignDefine()
     endfor
     call sign_define(g:listofsignsdefine)
 endfunction
+=======
+>>>>>>> 35a0c3a5cd9e350f803e0c28410bc88e5acde66a
 
 "write a function to add to gutter a symbol from bmf_dict
 "to the current line and current buffer
