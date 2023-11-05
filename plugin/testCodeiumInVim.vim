@@ -41,8 +41,8 @@ endfunction
 command! -nargs=? -complete=customlist,GetKeysSymbols AddToGutter call AddToGutter(<f-args>)
 command! RemoveFromGutter call RemoveFromGutter()
 
-command! TestEcho call TestEcho()
-execute 'nnoremap bb <Plug>TestEcho<CR>'
+command! -nargs=0 TestEcho call TestEcho()
+execute 'nnoremap te <Plug>TestEcho<CR>'
 
 "Mappings
 "add to gutter
