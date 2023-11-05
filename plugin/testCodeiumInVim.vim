@@ -42,7 +42,7 @@ command! -nargs=? -complete=customlist,GetKeysSymbols AddToGutter call AddToGutt
 command! RemoveFromGutter call RemoveFromGutter()
 
 command! TestEcho call TestEcho()
-nnoremap bb TestEcho <CR>
+execute 'nnoremap bb <Plug>TestEcho<CR>'
 
 "Mappings
 "add to gutter
