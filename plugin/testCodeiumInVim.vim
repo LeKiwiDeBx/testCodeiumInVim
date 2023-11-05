@@ -34,7 +34,7 @@ function! GetKeysSymbols(A, L, P)
 endfunction
 
 function! TestEcho()
-    echom "Test echo from *testCodeiumInVim* plugin"
+    echom "test echo from *testCodeiumInVim* plugin"
 endfunction
 
 "Commands
@@ -42,7 +42,7 @@ command! -nargs=? -complete=customlist,GetKeysSymbols AddToGutter call AddToGutt
 command! RemoveFromGutter call RemoveFromGutter()
 
 command! -nargs=0 TestEcho call TestEcho()
-execute 'nnoremap te <Plug>TestEcho<CR>'
+execute 'nmap te <Plug>TestEcho<CR>'
 
 "Mappings
 "add to gutter
