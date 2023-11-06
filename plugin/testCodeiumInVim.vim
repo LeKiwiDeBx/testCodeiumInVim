@@ -9,13 +9,15 @@ let g:bmf_symb = ['A', 'O', 'W', 'E', 'I']
 "and values bmf_symb
 let g:bmf_dict = {'alert': g:bmf_symb[0], 'ok': g:bmf_symb[1], 'warning': g:bmf_symb[2], 'error': g:bmf_symb[3], 'info': g:bmf_symb[4]}
 
-let g:listofsignsdefine = []
+
 "sign define -> sign_define({list})
 function! SignDefine()
+    echo "make a list of signs"
+    let g:listofsignsdefine = []
     "make a list of signs
     " write below a loop that populate listofsignsdefine with  dictionaries name and text keys from bmf_dict items
     for [key, symb] in g:bmf_dict->items()
-        call g:listofsignsdefine->add({'name': key, 'text': symb})
+        call sign_add(g:listofsignsdefine,{'name': key, 'text': symb})
     endfor
 call sign_define(g:listofsignsdefine)
 endfunction
