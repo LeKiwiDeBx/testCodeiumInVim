@@ -14,7 +14,7 @@ let g:listofsignsdefine = []
 function! SignDefine()
     "make a list of signs
     " write below a loop that populate listofsignsdefine with  dictionaries name and text keys from bmf_dict items
-    for [key, symb] in g:bmf_dic->items()
+    for [key, symb] in g:bmf_dict->items()
         call g:listofsignsdefine->add({'name': key, 'text': symb})
     endfor
 call sign_define(g:listofsignsdefine)
@@ -72,4 +72,3 @@ nmap <Leader>ta :AddToGutter<CR>
 "remove from gutter
 
 nmap <Leader>tr :RemoveFromGutter<CR>
-
