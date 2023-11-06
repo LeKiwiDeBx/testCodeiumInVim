@@ -44,7 +44,7 @@ function! RemoveFromGutter()
     let l:current_line = line('.')
     let l:current_buffer = bufnr('%')
     " get id du sign de la ligne courante
-    let l:sign_id = sign_getplaced(l:current_buffer, {'lnum': l:current_line, 'group': 'Codeium'})[0].id
+    let l:sign_id = sign_getplaced(l:current_buffer, {'lnum': l:current_line, 'group': 'Codeium'})[0]['id']
     echo "sign id: " . l:sign_id
     call sign_unplace('Codeium', {'id': l:sign_id, 'buffer': l:current_buffer})
 endfunction
