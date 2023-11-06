@@ -68,10 +68,6 @@ nmap <Leader>te :TestEcho<CR>
 
 "Mappings
 "add to gutter
-
-execute "nmap <Leader>ta :AddToGutter<space><C-Z><C-Z><CR>"
-
-
+execute "nnoremap <Leader>ta :AddToGutter<space><CR>"
 "remove from gutter
-
 nmap <Leader>tr :RemoveFromGutter<CR>
