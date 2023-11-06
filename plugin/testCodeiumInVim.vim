@@ -17,7 +17,7 @@ function! SignDefine()
     "make a list of signs
     " write below a loop that populate listofsignsdefine with  dictionaries name and text keys from bmf_dict items
     for [key, symb] in g:bmf_dict->items()
-        call sign_add(g:listofsignsdefine,{'name': key, 'text': symb})
+        call add(g:listofsignsdefine,{'name': key, 'text': symb})
     endfor
 call sign_define(g:listofsignsdefine)
 endfunction
