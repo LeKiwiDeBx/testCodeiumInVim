@@ -13,20 +13,27 @@ let g:listofsignsdefine = []
 "sign define -> sign_define({list})
 function! s:SignDefine()
     "make a list of signs
-    for [key, symb] in items(g:bmf_dict)
-        call add(g:listofsignsdefine, {'name': key, 'text': symb})  "add to listofsignsdefine
+    " write below a loop that populate listofsignsdefine with  dictionaries name and text keys from bmf_dict items
+    for [key, symb] in g:bmf_dic->items()
+        call g:listofsignsdefine->add({'name': key, 'text': symb})
     endfor
-    call sign_define(g:listofsignsdefine)
+call sign_define(g:listofsignsdefine)
 endfunction
 
 "write a function to add to gutter a symbol from bmf_dict
 "to the current line and current buffer
-function! AddToGutter(keySymbol)
+function! AddToGutter(keySymbol) "as: alert ok warning error info
+echo "Add to gutter"
     let l:current_line = line('.')
     let l:current_buffer = bufnr('%')
     if !empty(g:bmf_dict[a:keySymbol])
-        let l:current_symbol = g:bmf_dict[a:keySymbol]
-        let sign_id = sign_place(0, 'Codeium', l:current_symbol, l:current_buffer, {'lnum': l:current_line})
+        let l:current_symbol = a:keySymbol
+        "search in list g:listofsignsdefine 'name' key = l:current_symbol
+         let index = g:listofsignsdefine->indexof({i,v -> v.name ==# a:keySymbol})
+         if index != -1
+            call sign_place(0, 'Codeium', g:listofsignsdefine[index].name, l:current_buffer, {'lnum': l:current_line})
+        endif
+        "let sign_id = sign_place(0, 'Codeium', l:current_symbol, l:current_buffer, {'lnum': l:current_line})
     endif
 endfunction
 
@@ -44,22 +51,24 @@ function! GetKeysSymbols(A, L, P)
 endfunction
 
 function! TestEcho()
-    echom "test echo from *testCodeiumInVim* plugin"
+    echo "test echo from *testCodeiumInVim* plugin"
 endfunction
 
 "Commands
 command! -nargs=? -complete=customlist,GetKeysSymbols AddToGutter call AddToGutter(<f-args>)
 command! RemoveFromGutter call RemoveFromGutter()
 
-command! -nargs=0 TestEcho call TestEcho()
-execute 'nmap te <Plug>TestEcho'
+" write a command to call TestEcho function
+command! TestEcho call TestEcho()
+" write a mapping nmap to execute TestEcho command above
+nmap <Leader>te :TestEcho<CR>
 
 "Mappings
 "add to gutter
-if !hasmapto('<Plug>AddToGutter')
-    execute 'nmap <Leader>ba <Plug>AddToGutter<CR>'
-endif
+
+nmap <Leader>ta :AddToGutter<CR>
+
 "remove from gutter
-if !hasmapto('<Plug>RemoveFromGutter')
-    execute 'nmap <Leader>br <Plug>RemoveFromGutter<CR>'
-endif
+
+nmap <Leader>tr :RemoveFromGutter<CR>
+
