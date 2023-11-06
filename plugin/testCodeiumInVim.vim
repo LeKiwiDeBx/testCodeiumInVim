@@ -11,7 +11,7 @@ let g:bmf_dict = {'alert': g:bmf_symb[0], 'ok': g:bmf_symb[1], 'warning': g:bmf_
 
 let g:listofsignsdefine = []
 "sign define -> sign_define({list})
-function! s:SignDefine()
+function! SignDefine()
     "make a list of signs
     " write below a loop that populate listofsignsdefine with  dictionaries name and text keys from bmf_dict items
     for [key, symb] in g:bmf_dic->items()
@@ -52,6 +52,7 @@ endfunction
 
 function! TestEcho()
     echo "test echo from *testCodeiumInVim* plugin"
+    call SignDefine()
 endfunction
 
 "Commands
