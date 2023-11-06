@@ -35,7 +35,6 @@ echo "Add to gutter"
          if index != -1
             call sign_place(0, 'Codeium', g:listofsignsdefine[index].name, l:current_buffer, {'lnum': l:current_line})
         endif
-        "let sign_id = sign_place(0, 'Codeium', l:current_symbol, l:current_buffer, {'lnum': l:current_line})
     endif
 endfunction
 
@@ -44,7 +43,10 @@ endfunction
 function! RemoveFromGutter()
     let l:current_line = line('.')
     let l:current_buffer = bufnr('%')
-    call sign_unplace('Codeium', {'lnum': l:current_line, 'buffer': l:current_buffer})
+    " get id du sign de la ligne courante
+    let l:sign_id = sign_getplaced(l:current_buffer, {'lnum': l:current_line, 'group': 'Codeium'})[0].id
+    echo "sign id: " . l:sign_id
+    call sign_unplace('Codeium', {'id': l:sign_id, 'buffer': l:current_buffer})
 endfunction
 
 "write a function to get the list sorted of symbols from bmf_dict
