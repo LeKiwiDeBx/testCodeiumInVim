@@ -51,9 +51,10 @@ function! RemoveFromGutter()
     " get id du sign de la ligne courante
     try
         let l:sign_id = sign_getplaced(l:current_buffer, {'lnum': l:current_line, 'group': 'Codeium'})[0]['signs'][0]['id']
-        echo "sign id: " . l:sign_id
+        let l:sign_name = sign_getplaced(l:current_buffer,{'id': l:sign_id,'group':'Codeium'})[0].signs[0].name
         "test the return of sign_unplace
-         call sign_unplace('Codeium', {'id': l:sign_id, 'buffer': l:current_buffer})
+        call sign_unplace('Codeium', {'id': l:sign_id, 'buffer': l:current_buffer})
+        echo "remove from gutter sign id: " . l:sign_id . " name: " . l:sign_name . " line: " . l:current_line 
     catch
         echo "Ooops, a problem with sign to remove: "..v:exception
     endtry
