@@ -1,7 +1,7 @@
 if exists("g:loaded_codeium")
     finish
 endif
-let g:loaded_codeium = 1
+let g:loaded_codeium = 0
 
 "write a function init to call when vim start up
 function! CodeiumInVimInit()
@@ -14,6 +14,7 @@ function! CodeiumInVimInit()
      "make a list of signs
     let g:listofsignsdefine = []
     call SignDefine()
+    let g:loaded_codeium = 1
 endfunction
 
 "sign define -> sign_define({list})
