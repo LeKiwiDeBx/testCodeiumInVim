@@ -42,7 +42,7 @@ echo "Add to gutter"
         endif
         echo "add to gutter symbol: " . l:current_symbol . " line: " . l:current_line
     else
-    echo "Ooops, a problem with symbol to add: "..v:exception
+        echo "Ooops, a problem with symbol to add: " .. a:keySymbol .. " is unknown? please check!"
     endif
 endfunction
 
