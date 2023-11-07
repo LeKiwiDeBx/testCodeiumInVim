@@ -1,5 +1,5 @@
 if exists("g:loaded_codeium")
-    finish
+   " if codeium is already loaded, finish
 endif
 let g:loaded_codeium = 0
 
