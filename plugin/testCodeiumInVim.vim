@@ -2,18 +2,23 @@ if exists("g:loaded_codeium")
     finish
 endif
 let g:loaded_codeium = 1
-"write list a symbols A O W E I
-"in a global list named bmf_symb
-let g:bmf_symb = ['A', 'O', 'W', 'E', 'I']
-"write a global dictionary named bmf_dict with keys alert ok warning error info
-"and values bmf_symb
-let g:bmf_dict = {'alert': g:bmf_symb[0], 'ok': g:bmf_symb[1], 'warning': g:bmf_symb[2], 'error': g:bmf_symb[3], 'info': g:bmf_symb[4]}
- "make a list of signs
-let g:listofsignsdefine = []
+
+"write a function init to call when vim start up
+function! CodeiumInVimInit()
+    "write list a symbols A O W E I
+    "in a global list named bmf_symb
+    let g:bmf_symb = ['A', 'O', 'W', 'E', 'I']
+    "write a global dictionary named bmf_dict with keys alert ok warning error info
+    "and values bmf_symb
+    let g:bmf_dict = {'alert': g:bmf_symb[0], 'ok': g:bmf_symb[1], 'warning': g:bmf_symb[2], 'error': g:bmf_symb[3], 'info': g:bmf_symb[4]}
+     "make a list of signs
+    let g:listofsignsdefine = []
+    call SignDefine()
+endfunction
 
 "sign define -> sign_define({list})
 function! SignDefine()
-    echo "make a list of signs"
+echo "make a list of signs"
 " write below a loop that populate listofsignsdefine with  dictionaries name and text keys from bmf_dict items
     for [key, symb] in g:bmf_dict->items()
         call add(g:listofsignsdefine,{'name': key, 'text': symb})
@@ -60,11 +65,6 @@ endfunction
 
 function! TestEcho()
     echo "test echo from *testCodeiumInVim* plugin"
-endfunction
-
-"write a function init to call when vim start up
-function! CodeiumInVimInit()
-    call SignDefine()
 endfunction
 
 "Commands
