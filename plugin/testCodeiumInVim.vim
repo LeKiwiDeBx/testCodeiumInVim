@@ -49,14 +49,14 @@ function! RemoveFromGutter()
     let l:current_line = line('.')
     let l:current_buffer = bufnr('%')
     " get id du sign de la ligne courante
-    let l:sign_id = sign_getplaced(l:current_buffer, {'lnum': l:current_line, 'group': 'Codeium'})[0]['signs'][0]['id']
-    echo "sign id: " . l:sign_id
-    "test the return of sign_unplace
-    if !empty(l:sign_id)
-        call sign_unplace('Codeium', {'id': l:sign_id, 'buffer': l:current_buffer})
-    else
-        echo "no sign to remove"
-    endif
+    try
+        let l:sign_id = sign_getplaced(l:current_buffer, {'lnum': l:current_line, 'group': 'Codeium'})[0]['signs'][0]['id']
+        echo "sign id: " . l:sign_id
+        "test the return of sign_unplace
+         call sign_unplace('Codeium', {'id': l:sign_id, 'buffer': l:current_buffer})
+    catch
+        echo "Ooops, a problem with sign to remove: "..v:exception
+    endtry
 endfunction
 
 "write a function to get the list sorted of symbols from bmf_dict
