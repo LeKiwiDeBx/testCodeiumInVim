@@ -33,13 +33,16 @@ function! AddToGutter(keySymbol) "as: alert ok warning error info
 echo "Add to gutter"
     let l:current_line = line('.')
     let l:current_buffer = bufnr('%')
-    if !empty(g:bmf_dict[a:keySymbol])
+    if has_key(g:bmf_dict, a:keySymbol)
         let l:current_symbol = a:keySymbol
         "search in list g:listofsignsdefine 'name' key = l:current_symbol
          let index = g:listofsignsdefine->indexof({i,v -> v.name ==# a:keySymbol})
          if index != -1
             call sign_place(0, 'Codeium', g:listofsignsdefine[index].name, l:current_buffer, {'lnum': l:current_line})
         endif
+        echo "add to gutter symbol: " . l:current_symbol . " line: " . l:current_line
+    else
+    echo "Ooops, a problem with symbol to add: "..v:exception
     endif
 endfunction
 
@@ -54,7 +57,7 @@ function! RemoveFromGutter()
         let l:sign_name = sign_getplaced(l:current_buffer,{'id': l:sign_id,'group':'Codeium'})[0].signs[0].name
         "test the return of sign_unplace
         call sign_unplace('Codeium', {'id': l:sign_id, 'buffer': l:current_buffer})
-        echo "remove from gutter sign id: " . l:sign_id . " name: " . l:sign_name . " line: " . l:current_line 
+        echo "remove from gutter sign id: " . l:sign_id . " name: " . l:sign_name . " line: " . l:current_line
     catch
         echo "Ooops, a problem with sign to remove: "..v:exception
     endtry
