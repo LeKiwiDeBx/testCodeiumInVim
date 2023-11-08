@@ -1,8 +1,8 @@
-" if codeium is already loaded, finish
-if exists("g:loaded_codeium")
+" if testCodeiumInVim is already loaded, finish
+if exists("g:loaded_testCodeiumInVim")
     finish
 endif
-let g:loaded_codeium = 0
+let g:loaded_testCodeiumInVim = 0
 
 "write a function init to call when vim start up
 function! CodeiumInVimInit()
@@ -25,7 +25,7 @@ function! SignDefine()
         call add(g:listofsignsdefine,{'name': key, 'text': symb})
     endfor
     call sign_define(g:listofsignsdefine)
-    let g:loaded_codeium = 1
+    let g:loaded_testCodeiumInVim = 1
 endfunction
 
 "write a function to add to gutter a symbol from bmf_dict
