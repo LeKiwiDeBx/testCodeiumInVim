@@ -41,7 +41,7 @@ echo "Add to gutter"
          if index != -1
             call sign_place(0, 'Codeium', g:listofsignsdefine[index].name, l:current_buffer, {'lnum': l:current_line})
         endif
-        echo "add to gutter symbol: " . l:current_symbol . " line: " . l:current_line
+        echo "add to gutter symbol: " .. l:current_symbol .. " line: " .. l:current_line
     else
         echo "Ooops, a problem with symbol to add: " .. a:keySymbol .. " is unknown? please check!"
     endif
@@ -58,7 +58,7 @@ function! RemoveFromGutter()
         let l:sign_name = sign_getplaced(l:current_buffer,{'id': l:sign_id,'group':'Codeium'})[0].signs[0].name
         "test the return of sign_unplace
         call sign_unplace('Codeium', {'id': l:sign_id, 'buffer': l:current_buffer})
-        echo "remove from gutter sign id: " . l:sign_id . " name: " . l:sign_name . " line: " . l:current_line
+        echo "remove from gutter sign id: " .. l:sign_id .. " name: " .. l:sign_name .. " line: " .. l:current_line
     catch
         echo "Ooops, a problem with sign to remove: "..v:exception
     endtry
@@ -81,7 +81,11 @@ command! TestEcho call TestEcho()
 
 " Mappings
 "add to gutter
-nnoremap <Leader>ta :AddToGutter<space><tab>
+nnoremap <silent> <Plug>AddToGutter :AddToGutter<space><tab>
+if !hasmapto('<Plug>AddToGutter')
+    nmap <Leader>ta <Plug>AddToGutter
+endif
+
 "remove from gutter
 nnoremap <Leader>tr :RemoveFromGutter<CR>
 " write a mapping nmap to execute TestEcho command above
