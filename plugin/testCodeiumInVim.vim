@@ -1,5 +1,6 @@
+" if codeium is already loaded, finish
 if exists("g:loaded_codeium")
-   " if codeium is already loaded, finish
+    finish
 endif
 let g:loaded_codeium = 0
 
@@ -14,17 +15,17 @@ function! CodeiumInVimInit()
      "make a list of signs
     let g:listofsignsdefine = []
     call SignDefine()
-    let g:loaded_codeium = 1
 endfunction
 
 "sign define -> sign_define({list})
 function! SignDefine()
-echo "make a list of signs"
+    echo "make a list of signs"
 " write below a loop that populate listofsignsdefine with  dictionaries name and text keys from bmf_dict items
     for [key, symb] in g:bmf_dict->items()
         call add(g:listofsignsdefine,{'name': key, 'text': symb})
     endfor
-call sign_define(g:listofsignsdefine)
+    call sign_define(g:listofsignsdefine)
+    let g:loaded_codeium = 1
 endfunction
 
 "write a function to add to gutter a symbol from bmf_dict
@@ -78,7 +79,7 @@ command! RemoveFromGutter call RemoveFromGutter()
 " write a command to call TestEcho function
 command! TestEcho call TestEcho()
 
-"Mappings
+" Mappings
 "add to gutter
 nnoremap <Leader>ta :AddToGutter<space><tab>
 "remove from gutter
