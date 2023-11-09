@@ -64,6 +64,18 @@ function! RemoveFromGutter()
     endtry
 endfunction
 
+"write a function to list from gutter all signs placed
+"and show in command line of vim
+function! ListFromGutter()
+    let l:current_buffer = bufnr('%')
+    call sign_getplaced(l:current_buffer, {'group': 'Codeium'})
+    "sort by line number result call of sign_getplaced()
+    let listSortByLine = sort(sign_getplaced(l:current_buffer, {'group': 'Codeium'}), {i1, i2 -> i1.lnum - i2.lnum})
+    for i in listSortByLine
+        echo  " line: " .. i.signs[0].lnum .. " name: " .. i.signs[0].name
+    endfor
+endfunction
+
 "write a function to get the list sorted of symbols from bmf_dict
 function! GetKeysSymbols(A, L, P)
     return keys(g:bmf_dict)->sort()
@@ -87,7 +99,17 @@ if !hasmapto('<Plug>AddToGutter')
 endif
 
 "remove from gutter
-nnoremap <Leader>tr :RemoveFromGutter<CR>
+nnoremap <silent> <Plug>RemoveFromGutter :RemoveFromGutter<CR>
+if !hasmapto('<Plug>RemoveFromGutter')
+    nmap <Leader>tr <Plug>RemoveFromGutter
+endif
+
+"list from gutter
+nnoremap <silent> <Plug>ListFromGutter :ListFromGutter<CR>
+if !hasmapto('<Plug>ListFromGutter')
+    nmap <Leader>tl <Plug>ListFromGutter
+endif
+
 " write a mapping nmap to execute TestEcho command above
 nnoremap <Leader>te :TestEcho<CR>
 
