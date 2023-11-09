@@ -71,8 +71,9 @@ function! ListFromGutter()
     call sign_getplaced(l:current_buffer, {'group': 'Codeium'})
     "sort by line number result call of sign_getplaced()
     let listSortByLine = sort(sign_getplaced(l:current_buffer, {'group': 'Codeium'}), {i1, i2 -> i1.lnum - i2.lnum})
-    for i in listSortByLine
-        echo  " line: " .. i.signs[0].lnum .. " name: " .. i.signs[0].name
+    echo "list of signs from gutter"
+    for i in listSortByLine[0].signs
+        echo  " line: " .. i.lnum .. " name: " .. i.name
     endfor
 endfunction
 
