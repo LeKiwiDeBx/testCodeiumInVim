@@ -68,13 +68,17 @@ endfunction
 "and show in command line of vim
 function! ListFromGutter()
     let l:current_buffer = bufnr('%')
-    call sign_getplaced(l:current_buffer, {'group': 'Codeium'})
+    echo "List of signs from gutter"
     "sort by line number result call of sign_getplaced()
-    let listSortByLine = sort(sign_getplaced(l:current_buffer, {'group': 'Codeium'}), {i1, i2 -> i1.lnum - i2.lnum})
-    echo "list of signs from gutter"
-    for i in listSortByLine[0].signs
-        echo  " line: " .. i.lnum .. " name: " .. i.name
-    endfor
+    try
+        let g:listSortByLine = sort(sign_getplaced(l:current_buffer, {'group': 'Codeium'}), {i1, i2 -> i1.lnum - i2.lnum})
+        echo "number of signs: " .. len(g:listSortByLine[0].signs)
+        for i in g:listSortByLine[0].signs
+            echo  " line: " .. i.lnum .. " name: " .. i.name
+        endfor
+    catch
+        echo "Ooops, a problem with sign to list: "..v:exception
+    endtry
 endfunction
 
 "write a function to get the list sorted of symbols from bmf_dict
@@ -91,6 +95,8 @@ command! -nargs=? -complete=customlist,GetKeysSymbols AddToGutter call AddToGutt
 command! RemoveFromGutter call RemoveFromGutter()
 " write a command to call TestEcho function
 command! TestEcho call TestEcho()
+"write a command to call ListFromGutter function
+command! ListFromGutter call ListFromGutter()
 
 " Mappings
 "add to gutter
